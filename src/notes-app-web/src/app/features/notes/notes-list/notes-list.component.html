@@ -1,0 +1,46 @@
+<app-header />
+
+<main class="page-content">
+  @if (showCreatedBanner) {
+    <div class="banner banner-success" role="status">
+      <p>Note created.</p>
+      <button
+        type="button"
+        class="banner-dismiss"
+        aria-label="Dismiss"
+        (click)="dismissCreatedBanner()"
+      >
+        ×
+      </button>
+    </div>
+  }
+
+  <div class="page-toolbar">
+    <h1>My notes</h1>
+    <a routerLink="/notes/new" class="btn-primary" [class.disabled]="loading">New note</a>
+  </div>
+
+  @if (loading) {
+    <p class="status-message" aria-live="polite">Loading notes…</p>
+  } @else if (loadError) {
+    <div class="banner banner-error" role="alert">
+      <p>{{ loadError }}</p>
+      <button type="button" class="btn-secondary" (click)="loadNotes()">Retry</button>
+    </div>
+  } @else if (notes.length === 0) {
+    <div class="empty-state">
+      <h2>No notes yet</h2>
+      <p>Create your first note to get started.</p>
+      <a routerLink="/notes/new" class="btn-primary">Create note</a>
+    </div>
+  } @else {
+    <ul class="note-list">
+      @for (note of notes; track note.id) {
+        <li class="note-item">
+          <span class="note-title">{{ note.title }}</span>
+          <span class="note-date">{{ note.createdAt | date: 'mediumDate' }}</span>
+        </li>
+      }
+    </ul>
+  }
+</main>

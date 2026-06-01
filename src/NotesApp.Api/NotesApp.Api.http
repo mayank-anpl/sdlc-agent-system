@@ -1,0 +1,49 @@
+@NotesApp.Api_HostAddress = https://localhost:7014
+
+### Register
+POST {{NotesApp.Api_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+
+### Login
+POST {{NotesApp.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+
+### Current user (requires auth cookie from register/login)
+GET {{NotesApp.Api_HostAddress}}/api/auth/me
+
+### Logout (requires auth cookie)
+POST {{NotesApp.Api_HostAddress}}/api/auth/logout
+
+### List notes (requires auth cookie)
+GET {{NotesApp.Api_HostAddress}}/api/notes
+
+### Create note (requires auth cookie)
+POST {{NotesApp.Api_HostAddress}}/api/notes
+Content-Type: application/json
+
+{
+  "title": "My first note",
+  "body": "Hello from the notes API."
+}
+
+### Create note — validation error (empty title)
+POST {{NotesApp.Api_HostAddress}}/api/notes
+Content-Type: application/json
+
+{
+  "title": "   ",
+  "body": "Body only"
+}
+
+### Notes without auth — expect 401
+GET {{NotesApp.Api_HostAddress}}/api/notes

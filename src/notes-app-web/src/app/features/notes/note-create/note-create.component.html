@@ -1,0 +1,50 @@
+<app-header />
+
+<main class="page-content">
+  <h1>New note</h1>
+
+  @if (bannerError) {
+    <p class="banner banner-error" role="alert">{{ bannerError }}</p>
+  }
+
+  <form (ngSubmit)="submit()" novalidate>
+    <div class="field">
+      <label for="title">Title</label>
+      <input
+        id="title"
+        type="text"
+        name="title"
+        [(ngModel)]="title"
+        [disabled]="loading"
+        [attr.aria-invalid]="titleError ? true : null"
+        [attr.aria-describedby]="titleError ? 'title-error' : null"
+      />
+      @if (titleError) {
+        <p id="title-error" class="field-error">{{ titleError }}</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="body">Body</label>
+      <textarea
+        id="body"
+        name="body"
+        rows="8"
+        [(ngModel)]="body"
+        [disabled]="loading"
+        [attr.aria-invalid]="bodyError ? true : null"
+        [attr.aria-describedby]="bodyError ? 'body-error' : null"
+      ></textarea>
+      @if (bodyError) {
+        <p id="body-error" class="field-error">{{ bodyError }}</p>
+      }
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        {{ loading ? 'Saving…' : 'Save' }}
+      </button>
+      <a routerLink="/notes" class="btn-secondary">Cancel</a>
+    </div>
+  </form>
+</main>

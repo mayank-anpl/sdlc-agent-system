@@ -1,0 +1,34 @@
+---
+alwaysApply: true
+---
+
+# Notes App — Project Rules
+
+## What this is
+A v1 notes web app: users sign up / log in, then create and view their own private notes.
+Requirements live in docs/stories/, decisions in docs/adr/, design in docs/design/.
+
+## Stack (decided in ADR-001 — do not change without a new ADR)
+- Frontend: Angular 18 SPA (src/notes-app-web)
+- Backend: ASP.NET 8 Web API (src/NotesApp.Api)
+- Data: EF Core + SQLite
+- Auth: ASP.NET Core Identity, cookie-based
+
+## Stack-specific setup
+- EF migrations need the global tool (`dotnet tool install --global dotnet-ef`) and the packages
+  `Microsoft.EntityFrameworkCore.Sqlite` and `Microsoft.EntityFrameworkCore.Design`.
+- Identity: set `RequireConfirmedAccount = false` and `RequireConfirmedEmail = false`
+  (email verification is out of scope; otherwise sign-in after register fails silently).
+
+## Dev cross-origin config (avoids the "always 401")
+- Angular dev origin is http://localhost:4200; the API runs over HTTPS in dev.
+- CORS: `WithOrigins("http://localhost:4200")` + `AllowCredentials()`.
+- Auth cookie: HttpOnly, SameSite=Lax, Secure in production. Angular calls use `withCredentials: true`.
+
+## Hard boundaries (every agent, every request)
+- Never accept UserId from the client; always derive it from the authenticated session/claims.
+- Don't add features beyond docs/stories/ (no edit/delete, search, password reset, OAuth, etc.).
+
+## Testing
+- Automated tests live in a dedicated test project; set it up before writing integration tests,
+  or label that verification manual.

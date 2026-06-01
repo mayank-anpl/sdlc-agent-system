@@ -1,0 +1,104 @@
+.page-content {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.page-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.page-toolbar h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.status-message {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 2rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.empty-state h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+}
+
+.empty-state p {
+  margin: 0 0 1.5rem;
+  color: var(--text-muted);
+}
+
+.note-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.note-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  min-height: 3rem;
+  background: var(--surface);
+}
+
+.note-title {
+  font-weight: 500;
+}
+
+.note-date {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+a.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.page-toolbar .btn-primary {
+  width: auto;
+}
+
+.banner-success {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.banner-success p {
+  margin: 0;
+}
+
+.banner-dismiss {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  color: inherit;
+  padding: 0 0.25rem;
+}
+
+.banner-dismiss:focus-visible {
+  outline: 2px solid #047857;
+  outline-offset: 2px;
+}

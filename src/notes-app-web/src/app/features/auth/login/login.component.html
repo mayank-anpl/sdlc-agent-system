@@ -1,0 +1,54 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <h1>Log in</h1>
+
+    @if (bannerError) {
+      <p class="banner banner-error" role="alert">{{ bannerError }}</p>
+    }
+
+    <form (ngSubmit)="submit()" novalidate>
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          autocomplete="email"
+          [(ngModel)]="email"
+          [disabled]="loading"
+          [attr.aria-invalid]="emailError ? true : null"
+          [attr.aria-describedby]="emailError ? 'email-error' : null"
+        />
+        @if (emailError) {
+          <p id="email-error" class="field-error">{{ emailError }}</p>
+        }
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          autocomplete="current-password"
+          [(ngModel)]="password"
+          [disabled]="loading"
+          [attr.aria-invalid]="passwordError ? true : null"
+          [attr.aria-describedby]="passwordError ? 'password-error' : null"
+        />
+        @if (passwordError) {
+          <p id="password-error" class="field-error">{{ passwordError }}</p>
+        }
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        {{ loading ? 'Logging in…' : 'Log in' }}
+      </button>
+    </form>
+
+    <p class="auth-footer">
+      Don’t have an account?
+      <a routerLink="/signup">Sign up</a>
+    </p>
+  </div>
+</div>
